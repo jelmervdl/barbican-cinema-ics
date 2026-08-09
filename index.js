@@ -7,10 +7,10 @@ import fs from "node:fs";
 const timezone = "Europe/London";
 
 function parseRuntime(runtime) {
-  const match = metadata.match(/(?:(?<h>\d+)\s*(?:hr|hour))(?:\s*(?<m>\d+)\s*(?:min|mins|minutes))$/);
+  const match = runtime.match(/(?:(?<h>\d+)\s*(?:hr|hrs|hour))?(?:\s*(?<m>\d+)\s*(?:min|mins|minutes))$/);
   if (!match)
     throw Error(`could not parse '${runtime}'`);
-  return parseInt(match["h"] || "0") * 60 + parseInt(match["m"] || "0")
+  return parseInt(match.groups["h"] || "0") * 60 + parseInt(match.groups["m"] || "0")
 }
 
 function parseTime(time) {
